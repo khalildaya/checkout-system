@@ -1,0 +1,8 @@
+rules engine
+- conflict resolution function
+
+some graphQl treatment
+log requests and errors
+linting
+check passed rule type matches rule type assert function
+add returns for first rule processor
