@@ -86,7 +86,7 @@ function run(context, ruleBase, ruleProcessors) {
 	 * Create a new object to hold information about original scanned items, their total price,
 	 * identified promotions and items (and their final prices) after apply the identified promotions
 	 */
-	const updatedContext = JSON.parse(JSON.stringify(context));
+	let updatedContext = JSON.parse(JSON.stringify(context));
 	updatedContext.promotions = [];
 	updatedContext.itemsAfterPromotion = JSON.parse(JSON.stringify(context.scannedItems));
 	updatedContext.priceAfterPromotions = context.scannedItemsPrice;

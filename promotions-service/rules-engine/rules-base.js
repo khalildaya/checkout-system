@@ -18,6 +18,15 @@ const rules = [
 		offeredItemCount: 1, // quantity of item offered by promotion
 	},
 	{
+		id: "e2cd17c7-e9ff-4345-9064-62c0587b7aaa",
+		type: RULE_TYPES.BUY_COUNT_OF_X_GET_COUNT_OF_Y_FREE.id,
+		description: "Buy 1 MacBook Pro and get 1 Raspberry PiB free",
+		boughItemSku: "120P90", // Sku of item being bought
+		boughItemCount: 1, // quantity of item being bought
+		offeredItemSku: "A304SD", // Sku of item offered by promotion
+		offeredItemCount: 1, // quantity of item offered by promotion
+	},
+	/* {
 		id: "69252c48-98a1-4873-a28d-82d320da88c5",
 		type: RULE_TYPES.BUY_Y_OF_X_FOR_THE_PRICE_OF_Z.id,
 		description: "Buy 3 google Homes for the price of 2",
@@ -32,7 +41,7 @@ const rules = [
 		boughItemSku: "A304SD", // Sku of item being bought
 		boughItemCount: 3, // quantity of item being bought
 		discountPercent: 10, // percent to discount from price of all occurrences of bought item in scope of this promotion
-	},
+	}, */
 ];
 
 module.exports = Object.freeze(rules);
