@@ -1,12 +1,14 @@
-const fs = require("fs");
+const ruleEngine = require("./promotions-service/rules-engine");
 
-function getAllRulesProcessors(prefix, path) {
-	const fileNames = fs.readdirSync(path);
-	for (let i = 0; i < fileNames.length; i++) {
-		if (fs.statSync(path + "/" + fileNames[i]).isDirectory()) {
-			console.log(path + "/" + fileNames[i] + " is dir");
+ruleEngine.applyPromotions({
+	scannedItems: {
+		"43N23P": {
+			quantity: 1,
+			price: 45
+		},
+		"120P90": {
+			quantity: 3,
+			price: 45
 		}
 	}
-}
-
-getAllRulesProcessors("", "./promotions-service");
+});

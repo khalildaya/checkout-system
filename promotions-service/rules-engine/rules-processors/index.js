@@ -7,7 +7,7 @@
 "use strict";
 
 const fs = require("fs");
-const { RULE_PROCESSOR_DIR_PREFIX } = require("../constants");
+const { RULE_PROCESSOR_DIR_PREFIX } = require("../constants").STRINGS;
 const ERRORS = require("../errors");
 
 module.exports = Object.freeze({
@@ -55,7 +55,7 @@ function loadAllRuleProcessors(ruleProcessorsDirs) {
  * @return {object} a key value map where keys are rule types and values are assert and apply function for each rule type
  */
 function buildRuleProcessors() {
-	const ruleProcessorsDirs = getAllRuleProcessorDirs(RULE_PROCESSOR_DIR_PREFIX, "./");
+	const ruleProcessorsDirs = getAllRuleProcessorDirs(RULE_PROCESSOR_DIR_PREFIX, `${__dirname}`);
 	const ruleProcessors = loadAllRuleProcessors(ruleProcessorsDirs);
 	const result = {};
 	for (let i = 0; i < ruleProcessors.length; i++) {
@@ -74,16 +74,17 @@ function buildRuleProcessors() {
 		}
 
 		// throw an error if rule processor already exists for a given rule type
-		if (result[ruleProcessor.ruleType]) {
+		if (result[ruleTypeId]) {
 			throw Object.assign(ERRORS.RULE_TYPE_PROCESSOR_ALREADY_EXISTS, {
 				details: {
 					ruleType: ruleProcessor.ruleType
 				}
 			});
 		}
-		result[ruleProcessor.ruleType] = {
+		result[ruleTypeId] = {
 			assert: ruleProcessor.assert,
-			apply: ruleProcessor.apply
+			getActionsToApply: ruleProcessor.getActionsToApply,
+			applyRuleActions: ruleProcessor.applyRuleActions
 		}
 	}
 	return result;

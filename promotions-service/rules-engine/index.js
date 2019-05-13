@@ -7,7 +7,8 @@ const { NOT_APPLICABLE } = require("./constants");
 
 module.exports = Object.freeze({
 	loadRuleBase,
-	loadRuleProcessor
+	loadRuleProcessor,
+	applyPromotions,
 });
 
 function loadRuleBase() {
@@ -18,6 +19,9 @@ function loadRuleProcessor() {
 	ruleProcessors = require("./rules-processors").buildRuleProcessors();
 }
 
+function applyPromotions(context) {
+	return run (context, ruleBase, ruleProcessors);
+}
 
 function run(context, ruleBase, ruleProcessors) {
 	// Check what rules assert for the given context and keep track of identified promotions to be applied
