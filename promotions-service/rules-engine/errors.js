@@ -11,5 +11,20 @@ module.exports = Object.freeze({
 		code: `${ERROR_PREFIX}2`,
 		message: "Error while building rules processors. Rule type or rule type id is missing",
 		statusCode: 500
-	}
+	},
+	ASSERT_UNDEFINED_FOR_RULE_TYPE: {
+		code: `${ERROR_PREFIX}3`,
+		message: "Error while running rules. Assert function not defined for rule type",
+		statusCode: 500
+	},
+	GET_ACTIONS_TO_APPLY_UNDEFINED_FOR_RULE_TYPE: {
+		code: `${ERROR_PREFIX}4`,
+		message: "Error while running rules. getActionsToApply function not defined for rule type",
+		statusCode: 500
+	},
+	APPLY_RULE_ACTIONS_UNDEFINED_FOR_RULE_TYPE: {
+		code: `${ERROR_PREFIX}5`,
+		message: "Error while running rules. applyRuleActions function not defined for rule type",
+		statusCode: 500
+	},
 });

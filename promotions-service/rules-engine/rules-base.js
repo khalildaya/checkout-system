@@ -7,10 +7,6 @@
 "use strict";
 const RULE_TYPES = require("./rule-types");
 
-module.exports = Object.freeze({
-	loadRules
-});
-
 const rules = [
 	{
 		id: "e2cd17c7-e9ff-4345-9064-62c0587b7aaa",
@@ -39,6 +35,4 @@ const rules = [
 	},
 ];
 
-function loadRules() {
-	return rules;
-}
+module.exports = Object.freeze(rules);
