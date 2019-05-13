@@ -53,7 +53,7 @@ function assert(context, rule) {
 	const skus = Object.getOwnPropertyNames(scannedItems);
 	for (let i = 0; i < skus.length; i++) {
 		const sku = skus[i];
-		if (boughItemSku === sku) {
+		if (rule.boughItemSku === sku) {
 			const quantity = scannedItems[sku].quantity;
 			const quantityInPromotion = rule.boughItemCount;
 
@@ -62,7 +62,7 @@ function assert(context, rule) {
 			const quantityMultiples = Math.floor(quantity / quantityInPromotion);
 			if (quantityMultiples > 0) {
 				return {
-					applicableRule: rule,
+					rule: rule,
 					occurrence: quantityMultiples
 				}
 			}

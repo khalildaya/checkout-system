@@ -27,4 +27,9 @@ module.exports = Object.freeze({
 		message: "Error while running rules. applyRuleActions function not defined for rule type",
 		statusCode: 500
 	},
+	RULE_TYPE_PROCESSOR_UNDEFINED_FOR_RULE_TYPE: {
+		code: `${ERROR_PREFIX}6`,
+		message: "Error while running rules. Rule type processor function not defined for rule type",
+		statusCode: 500
+	},
 });

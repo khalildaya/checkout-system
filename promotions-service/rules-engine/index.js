@@ -33,6 +33,15 @@ function run(context, ruleBase, ruleProcessors) {
 		// Get current rule type
 		const ruleTypeId = rule.type;
 
+		// Throw an error if rule type processor has not been defined for rule type
+		if (!ruleProcessors[ruleTypeId]) {
+			throw Object.assign(ERRORS.RULE_TYPE_PROCESSOR_UNDEFINED_FOR_RULE_TYPE, {
+				details: {
+					rule
+				}
+			});
+		}
+
 		// Get assert, getActionsToApply, applyRuleActions functions for current rule type from rule type processor
 		const { assert, getActionsToApply, applyRuleActions } = ruleProcessors[ruleTypeId];
 
