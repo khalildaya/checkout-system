@@ -366,6 +366,10 @@ describe("updateQuantity", () => {
 			{
 				sku: "234234",
 				quantity: 8
+			},
+			{
+				sku: "120P90",
+				quantity: -20
 			}
 		];
 		inventoryService.__internals__.setInventory(inventory);
@@ -380,7 +384,7 @@ describe("updateQuantity", () => {
 				message: "Item quantity below zero",
 				statusCode: 400,
 				details: {
-					sku: "43N23P"
+					skus: ["43N23P", "120P90"]
 				}
 			});
 		}

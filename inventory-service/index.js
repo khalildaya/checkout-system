@@ -51,6 +51,10 @@ function getPrices(itemSkus) {
 function updateQuantities(itemQuantities) {
 	// Holds the resulting map of updated item quantities
 	const newQuantities = {};
+
+	// Holds items skus with negative quantity in case quantity update takes place;
+	const negativeQuantitySkus = [];
+
 	for (let i = 0; i < itemQuantities.length; i++) {
 		const sku = itemQuantities[i].sku;
 
@@ -95,12 +99,16 @@ function updateQuantities(itemQuantities) {
 		 * and prevent the item from going fewer than a certain limit
 		*/
 		if (newQuantities[sku] < 0) {
-			throw Object.assign(ERRORS.NEGATIVE_ITEM_QUANTITY, {
-				details: {
-					sku
-				}
-			});
+			negativeQuantitySkus.push(sku);
 		}
+	}
+
+	if (negativeQuantitySkus.length > 0) {
+		throw Object.assign(ERRORS.NEGATIVE_ITEM_QUANTITY, {
+			details: {
+				skus: negativeQuantitySkus
+			}
+		});
 	}
 
 	// Update quantities in inventory after no error was thrown
