@@ -1,3 +1,5 @@
 .env
 .vscode
 node_modules/
+# jest coverage folder
+coverage

@@ -7,3 +7,4 @@ linting
 check passed rule type matches rule type assert function
 add returns for first rule processor
 make rule processor prefix as env variable
+opt out of offers to avoid "negative item quantity"
