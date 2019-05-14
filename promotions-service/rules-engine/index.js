@@ -11,19 +11,25 @@ module.exports = Object.freeze({
 	applyPromotions,
 });
 
+// Dynamically loads for assessment purposes rules base to simulate a change in rule base database
 function loadRuleBase() {
 	ruleBase = require("./rules-base");
 }
 
+// dynamically loads rule processors to allow
+// adding new rule type processors on the fly without restarting the app
 function loadRuleProcessor() {
 	ruleProcessors = require("./rules-processors").buildRuleProcessors();
 }
 
-function applyPromotions(context) {
-	return run (context, ruleBase, ruleProcessors);
-}
 
-function run(context, ruleBase, ruleProcessors) {
+/**
+ * Apply all promotions to provided context
+ * @param {} context
+ * @return {object} an object holding originally scanned items and price,
+ * applied promotions and items and price after applying all promotions
+ */
+function applyPromotions(context) {
 	// Check what rules assert for the given context and keep track of identified promotions to be applied
 	const promotionsToApply = [];
 	for (let i = 0; i < ruleBase.length; i++) {
@@ -73,6 +79,12 @@ function run(context, ruleBase, ruleProcessors) {
 		}
 
 		// If current rule asserts, keep track of identified promotion to be applied later
+		/**
+		 * NOTE: here the asserted rule actions are not being applied here immediately,
+		 * rather I am keeping track of each applied rule since this is built with rule resolution in mind.
+		 * If there are conflicting rules, the conflict needs to be resolved and some rules might not end up being applied.
+		 * In short words, assert all rules, resolve rule conflict, remove rules not passing conflict, apply actions of rules surviving rules conflict
+		 */
 		const assertResult = assert(context, rule);
 		if ( assertResult !== NOT_APPLICABLE) {
 			promotionsToApply.push({
