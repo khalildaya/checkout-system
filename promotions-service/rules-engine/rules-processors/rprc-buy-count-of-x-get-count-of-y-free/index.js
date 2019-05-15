@@ -145,7 +145,13 @@ function getActionsToApply(applicableRuleInfo) {
  */
 function applyRuleActions(context, actionsToApply) {
 	const result = JSON.parse(JSON.stringify(context));
-	if (result.itemsAfterPromotion[actionsToApply.sku]) {
+	if (!result.itemsAfterPromotion) {
+		result.itemsAfterPromotion = {};
+		result.itemsAfterPromotion[actionsToApply.sku] = {
+			quantity: actionsToApply.quantity,
+			price: 0
+		}
+	} else if (result.itemsAfterPromotion[actionsToApply.sku]) {
 		result.itemsAfterPromotion[actionsToApply.sku].quantity += actionsToApply.quantity;
 	} else {
 		result.itemsAfterPromotion[actionsToApply.sku] = {
