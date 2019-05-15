@@ -9,8 +9,9 @@
 "use strict";
 
 const ruleType = require("../../rule-types").BUY_COUNT_OF_X_GET_COUNT_OF_Y_FREE;
-
 const { NOT_APPLICABLE } = require("../../constants").STRINGS;
+const { validateJsonSchema, schemaIds } = require("../../../../json-schema-validator-service/index.js");
+const ERRORS = require("../../errors");
 
 module.exports = Object.freeze({
 	ruleType: ruleType, // rule type
@@ -47,6 +48,15 @@ module.exports = Object.freeze({
 	}
  */
 function assert(context, rule) {
+	let result = validateJsonSchema(rule, schemaIds.RULE_TYPE_BUY_COUNT_OF_X_GET_COUNT_OF_Y_FREE);
+	if (!result.isValid) {
+		throw Object.assign(ERRORS.INVALID_RULE_TYPE_DEFINITION, {
+			details: {
+				rule,
+				errors: result.errors
+			}
+		});
+	}
 	const scannedItems = context.scannedItems;
 
 	// Get scanned items Sku. those Skus will be properties under "scannedItems" object in context

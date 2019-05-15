@@ -10,8 +10,11 @@
   "license": "ISC",
   "devDependencies": {
     "jest": "^24.8.0"
-	},
-	"jest": {
+  },
+  "jest": {
     "testEnvironment": "node"
+  },
+  "dependencies": {
+    "ajv": "^6.10.0"
   }
 }

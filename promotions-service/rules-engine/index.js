@@ -9,7 +9,15 @@ module.exports = Object.freeze({
 	loadRuleBase,
 	loadRuleProcessor,
 	applyPromotions,
+	__internals__: { // For unit testing only
+		setRuleBase
+	}
 });
+
+// Sets rule base, used for unit testing only
+function setRuleBase(newRuleBase) {
+	ruleBase = newRuleBase;
+}
 
 // Dynamically loads for assessment purposes rules base to simulate a change in rule base database
 function loadRuleBase() {

@@ -32,4 +32,9 @@ module.exports = Object.freeze({
 		message: "Error while running rules. Rule type processor function not defined for rule type",
 		statusCode: 500
 	},
+	INVALID_RULE_TYPE_DEFINITION: {
+		code: `${ERROR_PREFIX}7`,
+		message: "Invalid rule type definition",
+		statusCode: 500
+	},
 });
