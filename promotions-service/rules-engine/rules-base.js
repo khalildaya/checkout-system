@@ -17,7 +17,7 @@ const rules = [
 		offeredItemSku: "234234", // Sku of item offered by promotion
 		offeredItemCount: 1, // quantity of item offered by promotion
 	},
-	{
+	/* {
 		id: "69252c48-98a1-4873-a28d-82d320da88c5",
 		type: RULE_TYPES.BUY_Y_OF_X_FOR_THE_PRICE_OF_Z.id,
 		description: "Buy 3 google Homes for the price of 2",
@@ -32,7 +32,7 @@ const rules = [
 		boughItemSku: "A304SD", // Sku of item being bought
 		boughItemCount: 3, // quantity of item being bought
 		discountPercent: 10, // percent to discount from price of all occurrences of bought item in scope of this promotion
-	},
+	}, */
 ];
 
 module.exports = Object.freeze(rules);
