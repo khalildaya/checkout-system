@@ -6,22 +6,22 @@
 module.exports = {
 	"43N23P": {
 		name: "MacBook Pro",
-		price: 30,
-		quantity: 10
+		price: 5399.99,
+		quantity: 5
 	},
 	"234234": {
 		name: "Raspberry PiB",
-		price: 10,
-		quantity: 6
+		price: 30.00,
+		quantity: 2
 	},
 	"120P90": {
 		name: "Google Home",
-		price: 30,
+		price: 49.99,
 		quantity: 10
 	},
 	"A304SD": {
 		name: "Alexa speaker",
-		price: 30,
+		price: 109.50,
 		quantity: 10
 	}
 }

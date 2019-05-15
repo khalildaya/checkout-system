@@ -3,6 +3,10 @@
  * the app does not need to restart enabling a sort of hot-plugin of a rule processor.
  * for this to work, each rules processor needs to be defined in its own folder under "rues-processors" folder
  * the definition folder must start with a prefix "rprc-" and contain an "index.js" file which define the rule processor
+ * 
+ * The reason behind having a rule processor per type is to keep the rule engine smoothly extensible,
+ * minimize merge conflict since each rule type process has its own folder,
+ * make unit test easier by writing focused unit test for each rule type processor and overall unit test for the rule engine
  * */
 "use strict";
 

@@ -10,8 +10,8 @@ const ajv = new Ajv({
 });
 
 module.exports = Object.freeze({
-	validateJsonSchema,
-	schemaIds
+	schemaIds,
+	validateJsonSchema
 });
 
 function validateJsonSchema(json, schemaId) {

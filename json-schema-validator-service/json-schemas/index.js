@@ -2,13 +2,14 @@
 
 const RULE_TYPE_BUY_COUNT_OF_X_GET_COUNT_OF_Y_FREE = "RuleType-buyCountOfXGetCountOfYFree";
 const CONTEXT = "context";
+const CHECKOUT_INPUT = "checkout-input";
 
 module.exports = Object.freeze({
 	schemaIds: {
 		CONTEXT,
 		RULE_TYPE_BUY_COUNT_OF_X_GET_COUNT_OF_Y_FREE
 	},
-	schemas: [
+	schemas: [ // Ideally the schemas below are stored and retrieved from a database
 		{
 			"$schema": "http://json-schema.org/draft-07/schema#",
 			"$id": RULE_TYPE_BUY_COUNT_OF_X_GET_COUNT_OF_Y_FREE,
@@ -76,6 +77,16 @@ module.exports = Object.freeze({
 				"scannedItems",
 				"scannedItemsPrice"
 			]
+		},
+		{
+			"$schema": "http://json-schema.org/draft-07/schema#",
+			"$id": CHECKOUT_INPUT,
+			"type": "array",
+			"title": "Scanned items",
+			"additionalProperties": false,
+			"items": {
+				"type": "string",
+			}
 		}
 	]
 });
