@@ -384,7 +384,16 @@ describe("updateQuantity", () => {
 				message: "Item quantity below zero",
 				statusCode: 400,
 				details: {
-					skus: ["43N23P", "120P90"]
+					skus: [
+						{
+							sku:"43N23P",
+							newQuantity: -1,
+						},
+						{
+							sku: "120P90",
+							newQuantity: -10,
+						}
+					]
 				}
 			});
 		}

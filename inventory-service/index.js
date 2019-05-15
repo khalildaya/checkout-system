@@ -45,7 +45,7 @@ function getPrices(itemSkus) {
 
 /**
  * Updates quantity of an items
- * @param {array} itemQuantities array of key-value pairs with key being item sku and value being quantity to update
+ * @param {array} itemQuantities array of item sku and quantity to update
  * @return {object} a map of updated item quantities
  */
 function updateQuantities(itemQuantities) {
@@ -99,7 +99,10 @@ function updateQuantities(itemQuantities) {
 		 * and prevent the item from going fewer than a certain limit
 		*/
 		if (newQuantities[sku] < 0) {
-			negativeQuantitySkus.push(sku);
+			negativeQuantitySkus.push({
+				sku,
+				newQuantity: newQuantities[sku]
+			});
 		}
 	}
 

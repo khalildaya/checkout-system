@@ -1,7 +1,7 @@
 "use strict";
 
-const { validateJsonSchema, addSchema } = require("../../json-schema-validator-service");
-const { getPrices } = require("../../inventory-service");
+const { validateJsonSchema } = require("../../json-schema-validator-service");
+const { getPrices, updateQuantities } = require("../../inventory-service");
 const { applyPromotions } = require("../../promotions-service");
 const ERRORS = require("./errors");
 
@@ -26,6 +26,9 @@ function checkout(input) {
 	// Apply promotions
 	context = applyPromotions(context);
 
+	// Place order
+	placeOrder(context.itemsAfterPromotion);
+	
 	return context;
 }
 
@@ -109,4 +112,28 @@ function calculatePrices(scannedItemsQuantities) {
 		result.scannedItemsPrice += price;
 	}
 	return result;
+}
+
+/**
+ * Places the final order
+ * @param {array} itemsAfterPromotion a key-value map with key item sku and value being item quantity to take out of inventory
+ * @return {boolean} true if inventory update took place, otherwise throws an error
+ */
+function placeOrder(itemsAfterPromotion) {
+	// Create array of items and negative quantities to update in inventory
+	const itemQuantities = [];
+	const skus = Object.getOwnPropertyNames(itemsAfterPromotion);
+	for (let i = 0; i < skus.length; i++) {
+		const sku = skus[i];
+		const quantity = itemsAfterPromotion[sku].quantity * -1
+		itemQuantities.push({
+			sku,
+			quantity
+		});
+	}
+	// Take all items after promotion from inventory
+	updateQuantities(itemQuantities);
+
+	// Here order details could be stored in a database
+	return true;
 }
