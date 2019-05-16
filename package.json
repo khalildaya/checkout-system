@@ -4,7 +4,8 @@
   "description": "checkout api",
   "main": "index.js",
   "scripts": {
-    "test": "jest"
+    "test": "jest --coverage",
+    "start": "node server.js"
   },
   "author": "Khalil Daya",
   "license": "ISC",
@@ -15,6 +16,10 @@
     "testEnvironment": "node"
   },
   "dependencies": {
-    "ajv": "^6.10.0"
+    "ajv": "^6.10.0",
+    "body-parser": "^1.18.3",
+    "dotenv": "^6.0.0",
+    "express": "^4.16.3",
+    "helmet": "^3.12.1"
   }
 }
