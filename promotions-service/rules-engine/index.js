@@ -3,7 +3,7 @@
 let ruleBase = require("./rules-base");
 let ruleProcessors = require("./rules-processors").buildRuleProcessors();
 const ERRORS = require("./errors");
-const { NOT_APPLICABLE } = require("./constants");
+const { NOT_APPLICABLE } = require("./constants").STRINGS;
 
 module.exports = Object.freeze({
 	loadRuleBase,

@@ -109,7 +109,7 @@ function calculatePrices(scannedItemsQuantities) {
 			price,
 			unitPrice: inventoryPrices[sku]
 		}
-		result.scannedItemsPrice += price;
+		result.scannedItemsPrice = parseFloat((result.scannedItemsPrice + price).toFixed(2));
 	}
 	return result;
 }

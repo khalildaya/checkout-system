@@ -175,20 +175,21 @@ function applyRuleActions(context, actionsToApply) {
 		result.itemsAfterPromotion = {};
 		result.itemsAfterPromotion[actionsToApply.sku] = {
 			quantity: actionsToApply.originalQuantity,
-			price: actionsToApply.originalPrice - actionsToApply.priceReduction
+			price: parseFloat((actionsToApply.originalPrice - actionsToApply.priceReduction).toFixed(2))
 		}
 	} else if (result.itemsAfterPromotion[actionsToApply.sku]) {
-		result.itemsAfterPromotion[actionsToApply.sku].price -= actionsToApply.priceReduction;
+		result.itemsAfterPromotion[actionsToApply.sku].price =
+			parseFloat((result.itemsAfterPromotion[actionsToApply.sku].price - actionsToApply.priceReduction).toFixed(2));
 	} else {
 		result.itemsAfterPromotion[actionsToApply.sku] = {
 			quantity: actionsToApply.originalQuantity,
-			price: actionsToApply.originalPrice - actionsToApply.priceReduction
+			price: parseFloat((actionsToApply.originalPrice - actionsToApply.priceReduction).toFixed(2))
 		}
 	}
 	if (result.priceAfterPromotions === undefined || result.priceAfterPromotions === null) {
-		result.priceAfterPromotions = actionsToApply.originalPrice - actionsToApply.priceReduction;
+		result.priceAfterPromotions = parseFloat((actionsToApply.originalPrice - actionsToApply.priceReduction).toFixed(2));
 	} else {
-		result.priceAfterPromotions -= actionsToApply.priceReduction;
+		result.priceAfterPromotions = parseFloat((result.priceAfterPromotions - actionsToApply.priceReduction).toFixed(2));
 	}
 	return result;
 }

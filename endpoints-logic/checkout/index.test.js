@@ -3,7 +3,7 @@ const { checkout } = require("./index");
 const { updateQuantities } = require("../../inventory-service");
 const ERROR_PREFIX = "CHKINPUT";
 
-describe("validateInput", () => {
+describe("checkout", () => {
 	test("Throws an error due to invalid input", () => {
 		const input = ["234234", "43N23P", 345];
 		try {
@@ -132,22 +132,35 @@ describe("validateInput", () => {
 	});
 
 	test("Successfully applies promotion 'Buy 2 MacBook Pro and get 2 Raspberry PiB free' when buying 2 MacBook Pros", () => {
-		const input = ["43N23P", "43N23P"];
+		const input = ["43N23P", "43N23P", "120P90", "120P90", "120P90"];
 		expect(checkout(input)).toMatchObject({
 			"scannedItems": {
 				"43N23P": {
 					"quantity": 2,
 					"price": 10799.98,
 					"unitPrice": 5399.99
+				},
+				"120P90": {
+					"quantity": 3,
+					"price": 149.97,
+					"unitPrice": 49.99
 				}
 			},
-			"scannedItemsPrice": 10799.98,
+			"scannedItemsPrice": 10949.95,
 			"promotions": [{
 				"ruleId": "e2cd17c7-e9ff-4345-9064-62c0587b7aaa",
 				"ruleType": "buyCountOfXGetCountOfYFree",
 				"sku": "234234",
 				"quantity": 2,
 				"explanation": "2 X Buy 1 MacBook Pro and get 1 Raspberry PiB free"
+			}, {
+				"sku": "120P90",
+				"ruleId": "69252c48-98a1-4873-a28d-82d320da88c5",
+				"ruleType": "buyYOfXForPriceOfZ",
+				"originalQuantity": 3,
+				"originalPrice": 149.97,
+				"priceReduction": 49.99,
+				"explanation": "1 X Buy 3 google Homes for the price of 2"
 			}],
 			"itemsAfterPromotion": {
 				"234234": {
@@ -158,9 +171,14 @@ describe("validateInput", () => {
 					"quantity": 2,
 					"price": 10799.98,
 					"unitPrice": 5399.99
+				},
+				"120P90": {
+					"quantity": 3,
+					"price": 99.98,
+					"unitPrice": 49.99
 				}
 			},
-			"priceAfterPromotions": 10799.98
+			"priceAfterPromotions": 10899.96
 		});
 
 		// Restore inventory to quantities before test so other tests don't fail due to low inventory levels
@@ -172,6 +190,10 @@ describe("validateInput", () => {
 			{
 				sku: "234234",
 				quantity: 2
+			},
+			{
+				sku: "120P90",
+				quantity: 3
 			}
 		]);
 	});

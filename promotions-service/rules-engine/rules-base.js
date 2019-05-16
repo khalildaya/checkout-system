@@ -17,7 +17,7 @@ const rules = [
 		offeredItemSku: "234234", // Sku of item offered by promotion
 		offeredItemCount: 1, // quantity of item offered by promotion
 	},
-	/* {
+	{
 		id: "69252c48-98a1-4873-a28d-82d320da88c5",
 		type: RULE_TYPES.BUY_Y_OF_X_FOR_THE_PRICE_OF_Z.id,
 		description: "Buy 3 google Homes for the price of 2",
@@ -25,7 +25,7 @@ const rules = [
 		boughItemCount: 3, // quantity of item being bought
 		forPriceOfCount: 2, // quantity of item being charged as part of promotion
 	},
-	{
+	/* {
 		id: "16cc6b60-e963-4855-bc91-a10020fcdb01",
 		type: RULE_TYPES.BUY_MORE_THAN_COUNT_OF_X_GET_Y_PERCENT_DISCOUNT_ON_ALL_X.id,
 		description: "Buying more than 3 Alexa speakers will have a 10% discount on all Alexa speakers",

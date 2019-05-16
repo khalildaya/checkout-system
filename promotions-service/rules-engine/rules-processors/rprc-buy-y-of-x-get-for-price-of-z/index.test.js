@@ -89,8 +89,8 @@ describe("buyYOfXForPriceOfZ rule type processor assert", () => {
 					price: 30
 				}
 			},
-			scannedItemsPrice: 40,
-			priceAfterPromotions: 40
+			scannedItemsPrice: 40.00,
+			priceAfterPromotions: 40.00
 		}
 
 		const actionsToApply = getActionsToApply(assert(context, rule));
@@ -110,14 +110,14 @@ describe("buyYOfXForPriceOfZ rule type processor assert", () => {
 					price: 30
 				}
 			},
-			"scannedItemsPrice": 40,
+			"scannedItemsPrice": 40.00,
 			"itemsAfterPromotion": {
 				"120P90": {
 					"quantity": 10,
 					"price": 21
 				}
 			},
-			"priceAfterPromotions": 31
+			"priceAfterPromotions": 31.00
 		});
 	});
 });
