@@ -3,11 +3,13 @@
 const RULE_TYPE_BUY_COUNT_OF_X_GET_COUNT_OF_Y_FREE = "RuleType-buyCountOfXGetCountOfYFree";
 const CONTEXT = "context";
 const CHECKOUT_INPUT = "checkout-input";
+const RULE_TYPE_BUY_Y_OF_X_FOR_THE_PRICE_OF_Z = "buyYOfXForPriceOfZ";
 
 module.exports = Object.freeze({
 	schemaIds: {
 		CONTEXT,
-		RULE_TYPE_BUY_COUNT_OF_X_GET_COUNT_OF_Y_FREE
+		RULE_TYPE_BUY_COUNT_OF_X_GET_COUNT_OF_Y_FREE,
+		RULE_TYPE_BUY_Y_OF_X_FOR_THE_PRICE_OF_Z
 	},
 	schemas: [ // Ideally the schemas below are stored and retrieved from a database
 		{
@@ -87,6 +89,48 @@ module.exports = Object.freeze({
 			"items": {
 				"type": "string",
 			}
-		}
+		},
+		{
+			"$schema": "http://json-schema.org/draft-07/schema#",
+			"$id": RULE_TYPE_BUY_Y_OF_X_FOR_THE_PRICE_OF_Z,
+			"type": "object",
+			"title": "buyYOfXForPriceOfZ rule type",
+			"additionalProperties": false,
+			"properties": {
+				"id": {
+					"type": "string",
+					"format": "uuid",
+					"title": "Universal identifier of rule"
+				},
+				"type": {
+					"type": "string",
+					"title": "rule type"
+				},
+				"description": {
+					"type": "string",
+					"title": "rule description"
+				},
+				"boughItemSku": {
+					"type": "string",
+					"title": "Sku of item being bought"
+				},
+				"boughItemCount": {
+					"type": "integer",
+					"title": "quantity of item being bought"
+				},
+				"forPriceOfCount": {
+					"type": "integer",
+					"title": "quantity of item being charged as part of promotion"
+				},
+			},
+			"required": [
+				"id",
+				"type",
+				"description",
+				"boughItemSku",
+				"boughItemCount",
+				"forPriceOfCount"
+			]
+		},
 	]
 });
