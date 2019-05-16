@@ -131,8 +131,18 @@ describe("checkout", () => {
 		]);
 	});
 
-	test("Successfully applies promotion 'Buy 2 MacBook Pro and get 2 Raspberry PiB free' when buying 2 MacBook Pros", () => {
-		const input = ["43N23P", "43N23P", "120P90", "120P90", "120P90"];
+	test("Successfully applies all promotions", () => {
+		const input = [
+			"43N23P",
+			"43N23P",
+			"120P90",
+			"120P90",
+			"120P90",
+			"A304SD",
+			"A304SD",
+			"A304SD",
+			"A304SD"
+		];
 		expect(checkout(input)).toMatchObject({
 			"scannedItems": {
 				"43N23P": {
@@ -144,9 +154,14 @@ describe("checkout", () => {
 					"quantity": 3,
 					"price": 149.97,
 					"unitPrice": 49.99
+				},
+				"A304SD": {
+					"quantity": 4,
+					"price": 438,
+					"unitPrice": 109.5
 				}
 			},
-			"scannedItemsPrice": 10949.95,
+			"scannedItemsPrice": 11387.95,
 			"promotions": [{
 				"ruleId": "e2cd17c7-e9ff-4345-9064-62c0587b7aaa",
 				"ruleType": "buyCountOfXGetCountOfYFree",
@@ -161,6 +176,14 @@ describe("checkout", () => {
 				"originalPrice": 149.97,
 				"priceReduction": 49.99,
 				"explanation": "1 X Buy 3 google Homes for the price of 2"
+			}, {
+				"sku": "A304SD",
+				"ruleId": "16cc6b60-e963-4855-bc91-a10020fcdb01",
+				"ruleType": "buyMoreThanCountOfXGetYPercentDiscountOnAllXs",
+				"priceReduction": 43.8,
+				"originalPrice": 438,
+				"quantity": 4,
+				"explanation": "Buying more than 3 Alexa speakers will have a 10% discount on all Alexa speakers"
 			}],
 			"itemsAfterPromotion": {
 				"234234": {
@@ -176,9 +199,14 @@ describe("checkout", () => {
 					"quantity": 3,
 					"price": 99.98,
 					"unitPrice": 49.99
+				},
+				"A304SD": {
+					"quantity": 4,
+					"price": 394.2,
+					"unitPrice": 109.5
 				}
 			},
-			"priceAfterPromotions": 10899.96
+			"priceAfterPromotions": 11294.16
 		});
 
 		// Restore inventory to quantities before test so other tests don't fail due to low inventory levels

@@ -25,14 +25,14 @@ const rules = [
 		boughItemCount: 3, // quantity of item being bought
 		forPriceOfCount: 2, // quantity of item being charged as part of promotion
 	},
-	/* {
+	{
 		id: "16cc6b60-e963-4855-bc91-a10020fcdb01",
 		type: RULE_TYPES.BUY_MORE_THAN_COUNT_OF_X_GET_Y_PERCENT_DISCOUNT_ON_ALL_X.id,
 		description: "Buying more than 3 Alexa speakers will have a 10% discount on all Alexa speakers",
 		boughItemSku: "A304SD", // Sku of item being bought
 		boughItemCount: 3, // quantity of item being bought
 		discountPercent: 10, // percent to discount from price of all occurrences of bought item in scope of this promotion
-	}, */
+	},
 ];
 
 module.exports = Object.freeze(rules);
