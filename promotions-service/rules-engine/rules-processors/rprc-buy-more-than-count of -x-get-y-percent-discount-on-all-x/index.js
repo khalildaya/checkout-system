@@ -1,5 +1,5 @@
 /**
- * A module for a rule processor for rule type buyYOfXForPriceOfZ
+ * A module for a rule processor for rule type buyMoreThanCountOfXGetYPercentDiscountOnAllXs
  * exposes
  * (1) the rule type it operates on
  * (2) an assert function to assert the rule,
@@ -8,7 +8,7 @@
  * */
 "use strict";
 
-const ruleType = require("../../rule-types").BUY_Y_OF_X_FOR_THE_PRICE_OF_Z;
+const ruleType = require("../../rule-types").BUY_MORE_THAN_COUNT_OF_X_GET_Y_PERCENT_DISCOUNT_ON_ALL_X;
 const { NOT_APPLICABLE } = require("../../constants").STRINGS;
 const { validateJsonSchema, schemaIds } = require("../../../../json-schema-validator-service/index.js");
 const ERRORS = require("../../errors");
@@ -36,18 +36,18 @@ module.exports = Object.freeze({
  *     }
  *   }
  * }
- * @param {object} rule rule to evaluation, should be of type buyYOfXForPriceOfZ example rule is
+ * @param {object} rule rule to evaluation, should be of type buyMoreThanCountOfXGetYPercentDiscountOnAllXs example rule is
  * {
-		id: "69252c48-98a1-4873-a28d-82d320da88c5",
-		type: "buyYOfXForPriceOfZ",
-		description: "Buy 3 google Homes for the price of 2",
-		boughItemSku: "120P90", // Sku of item being bought
+		id: "16cc6b60-e963-4855-bc91-a10020fcdb01",
+		type: RULE_TYPES.BUY_MORE_THAN_COUNT_OF_X_GET_Y_PERCENT_DISCOUNT_ON_ALL_X.id,
+		description: "Buying more than 3 Alexa speakers will have a 10% discount on all Alexa speakers",
+		boughItemSku: "A304SD", // Sku of item being bought
 		boughItemCount: 3, // quantity of item being bought
-		forPriceOfCount: 2, // quantity of item being charged as part of promotion
+		discountPercent: 10, // percent to discount from price of all occurrences of bought item in scope of this promotion
 	}
  */
 function assert(context, rule) {
-	let result = validateJsonSchema(rule, schemaIds.RULE_TYPE_BUY_Y_OF_X_FOR_THE_PRICE_OF_Z);
+	let result = validateJsonSchema(rule, schemaIds.RULE_TYPE_BUY_MORE_THAN_COUNT_OF_X_GET_Y_PERCENT_DISCOUNT_ON_ALL_X);
 	if (!result.isValid) {
 		throw Object.assign(ERRORS.INVALID_RULE_TYPE_DEFINITION, {
 			details: {
@@ -70,26 +70,16 @@ function assert(context, rule) {
 			// sku price in scanned items
 			const price = scannedItems[sku].price;
 
-			// expected sku quantity in promotion, for promotion to apply
-			const quantityInPromotion = rule.boughItemCount;
+			if (quantity > rule.boughItemCount) {
 
-			// Break down the quantity of scanned item into multiples of quantity of item set in promotion
-			// for example if quantity of scanned item is 5 and quantity of item in promotion is 2, the breakdown will be floor(5/2) = 2
-			const quantityMultiples = Math.floor(quantity / quantityInPromotion);
-			if (quantityMultiples > 0) {
-
-				// the discounted quantity when applying the offer
-				const quantityDifference = quantityMultiples * (quantityInPromotion -  rule.forPriceOfCount);
-				const unitPrice = parseFloat((price / quantity).toFixed(2));
-				const priceReduction = quantityDifference * unitPrice;
+				const priceReduction = parseFloat((price * rule.discountPercent / 100).toFixed(2));
 
 				return {
 					sku, // Sku of item subject to promotion
 					rule: rule,
-					occurrence: quantityMultiples,
-					originalQuantity: quantity,
 					originalPrice: price,
-					priceReduction
+					priceReduction,
+					quantity
 				}
 			}
 		}
@@ -106,6 +96,8 @@ function assert(context, rule) {
     ruleId: <string>,
 		ruleType: <string>,
 		sku: <string>,
+		originalPrice: <number>,
+		priceReduction: <number>,
 		quantity: <number>,
 		explanation: <string>
 	}
@@ -114,19 +106,18 @@ function getActionsToApply(applicableRuleInfo) {
 	const {
 		sku,
 		rule,
-		occurrence,
-		originalQuantity,
 		originalPrice,
-		priceReduction
+		priceReduction,
+		quantity
 	} = applicableRuleInfo;
 	return {
 		sku,
 		ruleId: rule.id,
 		ruleType: rule.type,
-		originalQuantity,
-		originalPrice,
 		priceReduction,
-		explanation: `${occurrence} X ${rule.description}` // A user friendly explanation of promotion, if needed
+		originalPrice,
+		quantity,
+		explanation: rule.description // A user friendly explanation of promotion, if needed
 	}
 }
 
@@ -163,9 +154,8 @@ function getActionsToApply(applicableRuleInfo) {
  * {
     ruleId: <string>,
 		ruleType: <string>,
-		originalQuantity: <number>,
-		originalPrice: <number>,
 		priceReduction: <number>,
+		originalPrice: <number>,
 		explanation: <string>
 	}
  */
@@ -174,7 +164,7 @@ function applyRuleActions(context, actionsToApply) {
 	if (!result.itemsAfterPromotion) {
 		result.itemsAfterPromotion = {};
 		result.itemsAfterPromotion[actionsToApply.sku] = {
-			quantity: actionsToApply.originalQuantity,
+			quantity: actionsToApply.quantity,
 			price: parseFloat((actionsToApply.originalPrice - actionsToApply.priceReduction).toFixed(2))
 		}
 	} else if (result.itemsAfterPromotion[actionsToApply.sku]) {

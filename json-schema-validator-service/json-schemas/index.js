@@ -4,12 +4,14 @@ const RULE_TYPE_BUY_COUNT_OF_X_GET_COUNT_OF_Y_FREE = "RuleType-buyCountOfXGetCou
 const CONTEXT = "context";
 const CHECKOUT_INPUT = "checkout-input";
 const RULE_TYPE_BUY_Y_OF_X_FOR_THE_PRICE_OF_Z = "buyYOfXForPriceOfZ";
+const RULE_TYPE_BUY_MORE_THAN_COUNT_OF_X_GET_Y_PERCENT_DISCOUNT_ON_ALL_X = "buyMoreThanCountOfXGetYPercentDiscountOnAllXs";
 
 module.exports = Object.freeze({
 	schemaIds: {
 		CONTEXT,
 		RULE_TYPE_BUY_COUNT_OF_X_GET_COUNT_OF_Y_FREE,
-		RULE_TYPE_BUY_Y_OF_X_FOR_THE_PRICE_OF_Z
+		RULE_TYPE_BUY_Y_OF_X_FOR_THE_PRICE_OF_Z,
+		RULE_TYPE_BUY_MORE_THAN_COUNT_OF_X_GET_Y_PERCENT_DISCOUNT_ON_ALL_X
 	},
 	schemas: [ // Ideally the schemas below are stored and retrieved from a database
 		{
@@ -120,7 +122,7 @@ module.exports = Object.freeze({
 				},
 				"forPriceOfCount": {
 					"type": "integer",
-					"title": "quantity of item being charged as part of promotion"
+					"title": "discounted quantity of item in scope of promotion"
 				},
 			},
 			"required": [
@@ -132,5 +134,47 @@ module.exports = Object.freeze({
 				"forPriceOfCount"
 			]
 		},
+		{
+			"$schema": "http://json-schema.org/draft-07/schema#",
+			"$id": RULE_TYPE_BUY_MORE_THAN_COUNT_OF_X_GET_Y_PERCENT_DISCOUNT_ON_ALL_X,
+			"type": "object",
+			"title": "buyMoreThanCountOfXGetYPercentDiscountOnAllXs rule type",
+			"additionalProperties": false,
+			"properties": {
+				"id": {
+					"type": "string",
+					"format": "uuid",
+					"title": "Universal identifier of rule"
+				},
+				"type": {
+					"type": "string",
+					"title": "rule type"
+				},
+				"description": {
+					"type": "string",
+					"title": "rule description"
+				},
+				"boughItemSku": {
+					"type": "string",
+					"title": "Sku of item being bought"
+				},
+				"boughItemCount": {
+					"type": "integer",
+					"title": "quantity of item being bought"
+				},
+				"discountPercent": {
+					"type": "integer",
+					"title": "Discount percentage on all items of same sku"
+				},
+			},
+			"required": [
+				"id",
+				"type",
+				"description",
+				"boughItemSku",
+				"boughItemCount",
+				"discountPercent"
+			]
+		}
 	]
 });
