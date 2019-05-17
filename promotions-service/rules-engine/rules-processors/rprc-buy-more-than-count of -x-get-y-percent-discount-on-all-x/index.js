@@ -70,7 +70,7 @@ function assert(context, rule) {
 			// sku price in scanned items
 			const price = scannedItems[sku].price;
 
-			if (quantity > rule.boughItemCount) {
+			if (quantity >= rule.boughItemCount) {
 
 				const priceReduction = parseFloat((price * rule.discountPercent / 100).toFixed(2));
 
