@@ -1,0 +1,226 @@
+{
+	"info": {
+		"_postman_id": "f158cdf8-e914-46ca-9bef-ff6b20455872",
+		"name": "CHECKOUT_CODE_CHALLENGE",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "http://localhost:3000/checkout [Example 1]",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "[\r\n\t\"43N23P\",\r\n\t\"43N23P\",\r\n\t\"120P90\",\r\n\t\"120P90\",\r\n\t\"120P90\",\r\n\t\"A304SD\",\r\n\t\"A304SD\",\r\n\t\"A304SD\",\r\n\t\"A304SD\"\r\n]"
+				},
+				"url": {
+					"raw": "http://localhost:3000/checkout",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"checkout"
+					]
+				},
+				"description": "2 occurrences of \"Buy 1 MacBook Pro and get 1 Raspberry PiB free\",\n2 occurrences of \"Buy 3 google Homes for the price of 2\",\nBuying more than 3 Alexa speakers will have a 10% discount on all Alexa speakers"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:3000/checkout [Example 2]",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"value": "application/json",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "[\r\n\t\"43N23P\"\r\n]"
+				},
+				"url": {
+					"raw": "http://localhost:3000/checkout",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"checkout"
+					]
+				},
+				"description": "Buy 1 MacBook Pro and get 1 Raspberry PiB free"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:3000/checkout [Example 3]",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "[\r\n\t\"120P90\",\r\n\t\"120P90\",\r\n\t\"120P90\"\r\n]"
+				},
+				"url": {
+					"raw": "http://localhost:3000/checkout",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"checkout"
+					]
+				},
+				"description": "Buy 3 google Homes for the price of 2"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:3000/checkout [Example 4]",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "[\r\n\t\"A304SD\",\r\n\t\"A304SD\",\r\n\t\"A304SD\"\r\n]"
+				},
+				"url": {
+					"raw": "http://localhost:3000/checkout",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"checkout"
+					]
+				},
+				"description": "Buying more than 3 Alexa speakers will have a 10% discount on all Alexa speakers"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:3000/checkout [Example 5]",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "[\r\n\t\"120P90\",\r\n\t\"A304SD\"\r\n]"
+				},
+				"url": {
+					"raw": "http://localhost:3000/checkout",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"checkout"
+					]
+				},
+				"description": "No promotion applies"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:3000/checkout [Example 6]",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "[\r\n\t\"234234\",\r\n\t\"234234\",\r\n\t\"234234\"\r\n]"
+				},
+				"url": {
+					"raw": "http://localhost:3000/checkout",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"checkout"
+					]
+				},
+				"description": "Error due to not enough Raspberry PiB, too many Raspberry PiB items scanned"
+			},
+			"response": []
+		},
+		{
+			"name": "http://localhost:3000/checkout [Example 7]",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "[\r\n\t\"234234\",\r\n\t\"234234\",\r\n\t\"234234\"\r\n]"
+				},
+				"url": {
+					"raw": "http://localhost:3000/checkout",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"checkout"
+					]
+				},
+				"description": "Error due to not enough Raspberry PiB, 3 MacBook Pros scanned whcih will yield 3 Raspberry PiB in promotion but inventory only has 2 of them"
+			},
+			"response": []
+		}
+	]
+}
