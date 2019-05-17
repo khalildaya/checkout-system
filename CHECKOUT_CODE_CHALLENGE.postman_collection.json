@@ -221,6 +221,34 @@
 				"description": "Error due to not enough Raspberry PiB, 3 MacBook Pros scanned whcih will yield 3 Raspberry PiB in promotion but inventory only has 2 of them"
 			},
 			"response": []
+		},
+		{
+			"name": "http://localhost:3000/promotions/reloadProcessors",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "Content-Type",
+						"name": "Content-Type",
+						"type": "text",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "http://localhost:3000/promotions/reloadProcessors",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"promotions",
+						"reloadProcessors"
+					]
+				},
+				"description": "Error due to not enough Raspberry PiB, 3 MacBook Pros scanned whcih will yield 3 Raspberry PiB in promotion but inventory only has 2 of them"
+			},
+			"response": []
 		}
 	]
 }

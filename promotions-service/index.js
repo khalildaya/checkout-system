@@ -1,7 +1,6 @@
 "use strict";
 
 const {
-	loadRuleBase,
 	loadRuleProcessor,
 	applyPromotions,
 } = require("./rules-engine");
@@ -13,6 +12,5 @@ module.exports = Object.freeze({
 
 // Reload promotions to enable adding rules without restarting app
 function reloadPromotions() {
-	loadRuleBase();
 	loadRuleProcessor();
 }

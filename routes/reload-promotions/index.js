@@ -10,7 +10,8 @@ module.exports = Object.freeze({
 });
 
 function createPromotionsRoutes(app) {
-	app.get("/reloadPromotions", (req, res) => {
+	// An example of dynamically reloading processors
+	app.get("/promotions/reloadProcessors", (req, res) => {
 		const uuid = uuidv4();
 		const requestToLog = {
 			uuid,
