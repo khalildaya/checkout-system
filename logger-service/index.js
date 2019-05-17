@@ -3,6 +3,7 @@
  * not the actual persistent logs store (such as a database). Logging to a queue is faster
  * and does not require the API to wait until it gets a response back from the persistent logs store.
  * Using winston logger here for more flexible logging if needed
+ * Note: winston does not seem to work with vscode debugging https://github.com/winstonjs/winston/issues/1544
   */
 
 "use strict";
